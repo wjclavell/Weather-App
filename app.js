@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
 	let locationTimezone = document.querySelector(".location-timezone");
 	let temperatureSection = document.querySelector(".temperature");
 	const temperatureSpan = document.querySelector(".temperature span");
-	let temperatureFeels = document.querySelector(".temperature-feels");
+	let windRain = document.querySelector(".wind-rain");
 
 	if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(position => {
@@ -21,15 +21,15 @@ window.addEventListener("load", () => {
 			return response.json();
 		})
 		.then(data => {
-			const { temperature, summary, icon, apparentTemperature } = data.currently;
+			const { temperature, summary, icon, precipProbability, windSpeed } = data.currently;
 			//set DOM elements from the API
-			temperatureDegree.textContent = Math.floor(temperature);
-			temperatureFeels.textContent = `Feels like ${Math.floor(apparentTemperature)} °F`;
+			temperatureDegree.textContent = temperature.toFixed(2);
+			windRain.textContent = `Wind Speed: ${windSpeed}mph | Chance of Rain: ${Math.floor(precipProbability * 100)}%`;
 			temperatureDescription.textContent = summary;
 			locationTimezone.textContent = data.timezone.replace(/_/g, " ");
 			//formula for degrees F to C
 			let celsius = (temperature -32) * (5 / 9);
-			let feelsCelsius = (apparentTemperature -32) * (5 / 9);
+			let km = windSpeed * 1.60934;
 			//set icon
 			setIcons(icon, document.querySelector(".icon"));
 
@@ -37,12 +37,12 @@ window.addEventListener("load", () => {
 			temperatureSection.addEventListener('click', () => {
 				if(temperatureSpan.textContent === "°F") {
 					temperatureSpan.textContent = "°C";
-					temperatureDegree.textContent = Math.floor(celsius);
-					temperatureFeels.textContent = `Feels like ${Math.floor(feelsCelsius)} °C`;
+					temperatureDegree.textContent = celsius.toFixed(2);
+					windRain.textContent = `Wind Speed: ${km.toFixed(2)}km/h | Chance of Rain: ${Math.floor(precipProbability * 100)}%`;
 				} else {
 					temperatureSpan.textContent = "°F";
-					temperatureDegree.textContent = Math.floor(temperature);
-					temperatureFeels.textContent = `Feels like ${Math.floor(apparentTemperature)} °F`;
+					temperatureDegree.textContent = temperature.toFixed(2);
+					windRain.textContent = `Wind Speed: ${windSpeed}mph | Chance of Rain: ${Math.floor(precipProbability * 100)}%`;
 				}
 			})
 		});

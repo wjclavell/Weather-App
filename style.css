@@ -38,10 +38,7 @@ body {
 .degree-section h2 {
 	font-size: 40px;
 }
-.temperature-feels {
+.wind-rain {
 	display: flex;
 	align-items: center;
-}
-.temperature-feels span {
-	margin: 10px;
 }
