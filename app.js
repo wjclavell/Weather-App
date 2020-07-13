@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
 			const { temperature, summary, icon, precipProbability, windSpeed } = data.currently;
 			//set DOM elements from the API
 			temperatureDegree.textContent = temperature.toFixed(2);
-			windRain.textContent = `Wind Speed: ${windSpeed}mph | Chance of Rain: ${Math.floor(precipProbability * 100)}%`;
+			windRain.textContent = `💨 Speed: ${windSpeed}mph | Chance of 🌧️: ${Math.floor(precipProbability * 100)}%`;
 			temperatureDescription.textContent = summary;
 			locationTimezone.textContent = data.timezone.replace(/_/g, " ");
 			//formula for degrees F to C
@@ -70,11 +70,11 @@ window.addEventListener("load", () => {
 				if(temperatureSpan.textContent === "°F") {
 					temperatureSpan.textContent = "°C";
 					temperatureDegree.textContent = celsius.toFixed(2);
-					windRain.textContent = `Wind Speed: ${km.toFixed(2)}km/h | Chance of Rain: ${Math.floor(precipProbability * 100)}%`;
+					windRain.textContent = `💨 Speed: ${km.toFixed(2)}km/h | Chance of 🌧️: ${Math.floor(precipProbability * 100)}%`;
 				} else {
 					temperatureSpan.textContent = "°F";
 					temperatureDegree.textContent = temperature.toFixed(2);
-					windRain.textContent = `Wind Speed: ${windSpeed}mph | Chance of Rain: ${Math.floor(precipProbability * 100)}%`;
+					windRain.textContent = `💨 Speed: ${windSpeed}mph | Chance of 🌧️: ${Math.floor(precipProbability * 100)}%`;
 				}
 			})
 		});
@@ -89,3 +89,4 @@ window.addEventListener("load", () => {
 	}
 });
 
+console.log("????");
